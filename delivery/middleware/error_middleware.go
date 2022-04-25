@@ -3,7 +3,7 @@ package middleware
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"gokost.com/m/delivery/common_resp"
+	"mnctest.com/api/delivery/common_resp"
 	"net/http"
 )
 

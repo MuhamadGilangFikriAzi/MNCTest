@@ -2,12 +2,12 @@ package manager
 
 import (
 	"github.com/jmoiron/sqlx"
-	"gokost.com/m/repository"
 	"gorm.io/gorm"
+	"mnctest.com/api/repository"
 )
 
 type RepoManager interface {
-	AdminRepo() repository.AdminRepo
+	CustomerRepo() repository.CustomerRepo
 }
 
 type repoManager struct {
@@ -15,8 +15,8 @@ type repoManager struct {
 	GormDb *gorm.DB
 }
 
-func (r *repoManager) AdminRepo() repository.AdminRepo {
-	return repository.NewAdminRepo(r.SqlxDb)
+func (r *repoManager) CustomerRepo() repository.CustomerRepo {
+	return repository.NewCustomerRepo(r.SqlxDb)
 }
 
 func NewRepoManager(sqlxDb *sqlx.DB, gormDb *gorm.DB) RepoManager {

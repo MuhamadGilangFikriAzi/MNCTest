@@ -9,7 +9,7 @@ DBHOST: "localhost"
 DBUSERNAME: "postgres"
 DBPASSWORD: "12345"
 DBPORT: "5432"
-DBNAME: "db_go_kost"
+DBNAME: "db_mnc"
 
 DISCORD_WEBHOOK_URL: "https://discord.com/api/webhooks/961186062586236958/4-EXW7G7eVjZbqsslxH-sVyEOBqc05xOlJiVKqS5xFk96xb8qjOy9HJV_c_OPqeqx93C"
 DISCORD_USERNAME: "Log Api Error"

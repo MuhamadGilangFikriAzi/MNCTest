@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/jmoiron/sqlx"
-	"gokost.com/m/authenticator"
-	"gokost.com/m/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"mnctest.com/api/authenticator"
+	"mnctest.com/api/config"
 	"os"
 )
 

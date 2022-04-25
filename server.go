@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"gokost.com/m/authenticator"
-	"gokost.com/m/config"
-	"gokost.com/m/delivery/api"
-	"gokost.com/m/delivery/middleware"
-	"gokost.com/m/manager"
+	"mnctest.com/api/authenticator"
+	"mnctest.com/api/config"
+	"mnctest.com/api/delivery/api"
+	"mnctest.com/api/delivery/middleware"
+	"mnctest.com/api/manager"
 )
 
 type AppServer interface {
@@ -33,7 +33,10 @@ func (s *serverConfig) initHeader() {
 
 func (s *serverConfig) routeGroupApi() {
 	apiLogin := s.gin.Group("login")
-	api.NewLoginApi(apiLogin, s.UseCaseManager.LoginAdminUseCase(), s.ConfigToken)
+	api.NewLoginApi(apiLogin, s.UseCaseManager.LoginCustomerUseCase(), s.ConfigToken)
+
+	apiCustomer := s.gin.Group("customers")
+	api.NewCustomerApi(apiCustomer, s.UseCaseManager.CustomerUseCase())
 }
 
 func (s *serverConfig) Run() {

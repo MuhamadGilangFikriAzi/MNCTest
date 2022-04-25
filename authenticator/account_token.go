@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-redis/redis/v8"
-	"gokost.com/m/delivery/appresponse"
+	"mnctest.com/api/delivery/appresponse"
 	"time"
 )
 
 type Token interface {
-	CreateToken(dataLogin appresponse.LoginResponse) (string, error)
+	CreateToken(dataLogin appresponse.CustomerResponse) (string, error)
 	VerifAccessToken(tokenString string) (jwt.MapClaims, error)
 	GetAppName() string
 	CheckTokenAvailable(tokenString string) (bool, error)
@@ -38,7 +38,7 @@ func (t *token) UpdateToken(tokenString string) {
 	t.rdb.Set(t.ctx, "token", tokenString, t.config.AccessTokenDuration)
 }
 
-func (t *token) CreateToken(dataLogin appresponse.LoginResponse) (string, error) {
+func (t *token) CreateToken(dataLogin appresponse.CustomerResponse) (string, error) {
 	claims := MyClaims{ // Menyiapkan struct dengan isi yg dibutuhkan
 		StandardClaims: jwt.StandardClaims{
 			Issuer: t.config.AplicationName,

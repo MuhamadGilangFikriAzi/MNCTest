@@ -2,6 +2,8 @@ package utility
 
 import (
 	"fmt"
+	"github.com/google/uuid"
+	"github.com/leekchan/accounting"
 	"golang.org/x/crypto/bcrypt"
 	"strings"
 	"time"
@@ -13,6 +15,10 @@ func AddZeroAndToString(number int) string {
 	}
 	return fmt.Sprintf("%d", number)
 
+}
+
+func GenerateUUID() string {
+	return uuid.New().String()
 }
 
 func ThisDay() string {
@@ -43,6 +49,11 @@ func CreateNameFile(name string) string {
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
+}
+
+func CunrrencyFormat(currency string, number interface{}) string {
+	ac := accounting.NewAccounting(currency, 0, ".", ",", "%s %v", "%s (%v)", "%s --")
+	return ac.FormatMoney(number)
 }
 
 func CheckPasswordHash(password, hash string) bool {

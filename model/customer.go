@@ -1,15 +1,10 @@
 package model
 
-import (
-	"github.com/jackc/pgtype"
-)
-
 type Customer struct {
-	Id          string
-	Name        string
-	Address     string
-	Ktp         string      `db:"ktpid"`
-	PhoneNumber string      `db:"phone_number"`
-	StartRentAt pgtype.Date `db:"start_rent_at"`
-	EndRentAt   pgtype.Date `db:"end_rent_at"`
+	Id             string  `db:"id"`
+	Name           string  `db:"name"`
+	TypeCustomerID string  `db:"type_customer_id"`
+	Balance        float64 `db:"balance"`
+	Username       string  `db:"username"`
+	Password       string  `db:"password"`
 }

@@ -1,19 +1,20 @@
 package middleware
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	authenticator2 "gokost.com/m/authenticator"
-	"gokost.com/m/delivery/common_resp"
+	"mnctest.com/api/authenticator"
+	"mnctest.com/api/delivery/common_resp"
 	"net/http"
 	"strings"
 )
 
 type AuthTokenMiddleware struct {
-	acctToken authenticator2.Token
+	acctToken authenticator.Token
 }
 
-func NewAuthTokenMiddleware(configToken authenticator2.Token) *AuthTokenMiddleware {
+func NewAuthTokenMiddleware(configToken authenticator.Token) *AuthTokenMiddleware {
 	return &AuthTokenMiddleware{
 		acctToken: configToken,
 	}
@@ -21,7 +22,8 @@ func NewAuthTokenMiddleware(configToken authenticator2.Token) *AuthTokenMiddlewa
 
 func (a *AuthTokenMiddleware) TokenAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.Request.URL.Path == "/login/admin" || strings.Contains(c.Request.URL.Path, "/files") {
+		fmt.Println(c.Request.URL.Path)
+		if c.Request.URL.Path == "/login" || c.Request.URL.Path == "/customers" || c.Request.URL.Path == "/customers/register" {
 			c.Next()
 		} else {
 			h := authHeader{}

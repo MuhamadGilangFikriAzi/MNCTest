@@ -2,30 +2,27 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"gokost.com/m/authenticator"
-	"gokost.com/m/delivery/apprequest"
-	"gokost.com/m/delivery/common_resp"
-	"gokost.com/m/delivery/logger"
-	"gokost.com/m/usecase"
+	"mnctest.com/api/authenticator"
+	"mnctest.com/api/delivery/apprequest"
+	"mnctest.com/api/delivery/common_resp"
+	"mnctest.com/api/usecase"
 	"net/http"
 )
 
 type loginApi struct {
-	usecase     usecase.LoginAdminUsecase
+	usecase     usecase.LoginCustomerUsecase
 	configToken authenticator.Token
 }
 
-func (l *loginApi) LoginAdmin() gin.HandlerFunc {
+func (l *loginApi) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var dataLogin apprequest.AdminRequest
+		var dataLogin apprequest.CustomerRequest
 		if errBind := c.ShouldBindJSON(&dataLogin); errBind != nil {
-			logger.SendLogToDiscord("Login", errBind)
 			common_resp.NewCommonResp(c).FailedResp(http.StatusInternalServerError, common_resp.FailedMessage(errBind.Error()))
 			return
 		}
-		dataAdmin, is_available, err := l.usecase.LoginAdmin(dataLogin)
+		dataAdmin, is_available, err := l.usecase.LoginCustomer(dataLogin)
 		if err != nil {
-			logger.SendLogToDiscord("Login", err)
 			common_resp.NewCommonResp(c).FailedResp(http.StatusInternalServerError, common_resp.FailedMessage(err.Error()))
 			return
 		}
@@ -44,11 +41,11 @@ func (l *loginApi) LoginAdmin() gin.HandlerFunc {
 	}
 }
 
-func NewLoginApi(routeGroup *gin.RouterGroup, adminUsecase usecase.LoginAdminUsecase, configToken authenticator.Token) {
+func NewLoginApi(routeGroup *gin.RouterGroup, adminUsecase usecase.LoginCustomerUsecase, configToken authenticator.Token) {
 	api := &loginApi{
 		adminUsecase,
 		configToken,
 	}
 
-	routeGroup.POST("/admin", api.LoginAdmin())
+	routeGroup.POST("", api.Login())
 }

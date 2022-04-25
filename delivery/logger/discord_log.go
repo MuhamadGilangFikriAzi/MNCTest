@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gtuk/discordwebhook"
 	"github.com/rs/zerolog"
-	"gokost.com/m/config"
-	"gokost.com/m/utility"
+	"mnctest.com/api/config"
+	"mnctest.com/api/utility"
 	"os"
 )
 

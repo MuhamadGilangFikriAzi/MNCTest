@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/viper"
-	"gokost.com/m/authenticator"
+	"mnctest.com/api/authenticator"
 	"time"
 )
 

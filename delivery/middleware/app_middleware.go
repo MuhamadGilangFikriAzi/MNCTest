@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jmoiron/sqlx"
-	"gokost.com/m/delivery/logger"
+	"mnctest.com/api/delivery/logger"
 	"time"
 )
 
