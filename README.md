@@ -1,6 +1,9 @@
 # MNCTest
 make api using golang
 
+Database : PosgreSql, Redis
+Framework : Gin 
+
 api collection : https://www.postman.com/mgilangfikriazi/workspace/go-mnc-test
 
 Database
