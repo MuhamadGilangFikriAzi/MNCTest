@@ -5,6 +5,7 @@ import "mnctest.com/api/usecase"
 type UseCaseManager interface {
 	LoginCustomerUseCase() usecase.LoginCustomerUsecase
 	CustomerUseCase() usecase.CustomerUseCase
+	TransactionUseCase() usecase.BalanceTransferUseCase
 }
 
 type useCaseManager struct {
@@ -17,6 +18,10 @@ func (u *useCaseManager) LoginCustomerUseCase() usecase.LoginCustomerUsecase {
 
 func (u *useCaseManager) CustomerUseCase() usecase.CustomerUseCase {
 	return usecase.NewCustomerUsecase(u.repo.CustomerRepo())
+}
+
+func (u *useCaseManager) TransactionUseCase() usecase.BalanceTransferUseCase {
+	return usecase.NewBlanceTransferUseCase(u.repo.TransactionRepo())
 }
 
 func NewUseCaseManager(repo RepoManager) UseCaseManager {

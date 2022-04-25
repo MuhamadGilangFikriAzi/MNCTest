@@ -37,6 +37,9 @@ func (s *serverConfig) routeGroupApi() {
 
 	apiCustomer := s.gin.Group("customers")
 	api.NewCustomerApi(apiCustomer, s.UseCaseManager.CustomerUseCase())
+
+	apiTransaction := s.gin.Group("transfer")
+	api.NewTransactionApi(apiTransaction, s.UseCaseManager.TransactionUseCase())
 }
 
 func (s *serverConfig) Run() {

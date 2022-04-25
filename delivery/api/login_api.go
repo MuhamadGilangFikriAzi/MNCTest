@@ -14,6 +14,13 @@ type loginApi struct {
 	configToken authenticator.Token
 }
 
+func (l *loginApi) Logout() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		l.configToken.RemoveToken()
+		common_resp.NewCommonResp(c).SuccessResp(http.StatusOK, common_resp.SuccessMessage("success logout", ""))
+	}
+}
+
 func (l *loginApi) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var dataLogin apprequest.CustomerRequest
@@ -48,4 +55,5 @@ func NewLoginApi(routeGroup *gin.RouterGroup, adminUsecase usecase.LoginCustomer
 	}
 
 	routeGroup.POST("", api.Login())
+	routeGroup.POST("/logout", api.Logout())
 }

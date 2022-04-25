@@ -15,6 +15,7 @@ type Token interface {
 	GetAppName() string
 	CheckTokenAvailable(tokenString string) (bool, error)
 	UpdateToken(tokenString string)
+	RemoveToken()
 }
 
 type TokenConfig struct {
@@ -32,6 +33,10 @@ type token struct {
 
 func (t *token) GetAppName() string {
 	return t.config.AplicationName
+}
+
+func (t *token) RemoveToken() {
+	t.rdb.Del(t.ctx, "token")
 }
 
 func (t *token) UpdateToken(tokenString string) {

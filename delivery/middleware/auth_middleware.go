@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"mnctest.com/api/authenticator"
@@ -22,7 +21,6 @@ func NewAuthTokenMiddleware(configToken authenticator.Token) *AuthTokenMiddlewar
 
 func (a *AuthTokenMiddleware) TokenAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		fmt.Println(c.Request.URL.Path)
 		if c.Request.URL.Path == "/login" || c.Request.URL.Path == "/customers" || c.Request.URL.Path == "/customers/register" {
 			c.Next()
 		} else {
